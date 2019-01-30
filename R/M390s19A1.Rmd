@@ -1,0 +1,91 @@
+---
+title: "Assignment 1"
+author: "Dave Miller"
+date: "1/30/2019"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+**Due date: ** Wednesday, 2/6/19 at 11:59pm.
+\vspace{.5in}
+
+1. Choose a data source from the preloaded data sources in R for a **regression problem**:
+
+$$Y \sim f(X),$$
+where $Y$ is your response variable, and $X$ is your indicator.  Present your answer as follows:
+
+- **Data Source :**
+- **Y :**
+- **X :**
+
+and print the first 6 rows of your data.
+```{r echo=TRUE}
+
+```
+
+
+\vspace{.2in}
+
+2. Plot your data using ggplot with colored dots (not black) and a theme of your choosing (not the default theme).  Be sure to add a title to the plot.
+
+```{r echo=TRUE}
+
+```
+
+
+\vspace{.2in}
+
+
+3. Split your dataset into training and testing sets using a 75% / 25% train / test split ratio.
+
+```{r echo=TRUE}
+
+```
+
+
+\vspace{.2in}
+
+
+4. Use the built in `lm()` function to build a **linear model** on the training set only and present the coefficients to the model.
+
+```{r echo=TRUE}
+
+```
+
+
+\vspace{.2in}
+
+
+5. Find the MSE of the linear model on both the training and test set. 
+
+```{r echo=TRUE}
+
+```
+
+
+\vspace{.2in}
+
+
+6. Repeat problems 4-5 for polynomials of degree 2-10.  
+
+```{r echo=TRUE}
+
+```
+
+
+\vspace{.2in}
+
+
+7. Is there a model you found in problem 6. that has **overfit** the training data?  Explain your reasoning.
+
+\vspace{.2in}
+
+8. Use your work from problems 4-6 to determine the model that is best to use on the dataset.  Explain your reasoning on why you chose this model in detail, stating specfic values computed in problems 5-6.
+
