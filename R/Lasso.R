@@ -1,11 +1,16 @@
 #install.packages('glmnet')
 library(glmnet)
+library(tidyverse)
+
+
 
 Ames <- AmesHousing::make_ames()
 set.seed(123)
 index   <- sample(1:nrow(Ames), round(nrow(Ames) * 0.7))
 ames_train <- Ames[index, ]
 ames_test  <- Ames[-index, ]
+
+
 
 # Create training and testing feature model matrices and response vectors.
 # we use model.matrix(...)[, -1] to discard the intercept
@@ -14,6 +19,7 @@ ames_train_y <- log(ames_train$Sale_Price)
 
 ames_test_x <- model.matrix(Sale_Price ~ ., ames_test)[, -1]
 ames_test_y <- log(ames_test$Sale_Price)
+
 
 # What is the dimension of of your feature matrix?
 dim(ames_train_x)
@@ -40,6 +46,7 @@ coef(ames_ridge)[c("Gr_Liv_Area", "TotRms_AbvGrd"), 100]
 coef(ames_ridge)[c("Gr_Liv_Area", "TotRms_AbvGrd"), 1] 
 ##   Gr_Liv_Area TotRms_AbvGrd 
 ##  5.551202e-40  1.236184e-37
+
 
 
 # Apply CV Ridge regression to ames data
