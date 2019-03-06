@@ -1,6 +1,6 @@
-
+library(tidyverse)
 # Function
-coord_desc_lasso <- function(X,Y, epsilon, lambda, drop_int=FALSE){
+coord_desc_lasso <- function(X,Y, epsilon, lambda, drop_int=TRUE){
   n <- nrow(Y)
   m <- ncol(X)
   
