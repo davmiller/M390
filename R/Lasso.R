@@ -12,6 +12,23 @@ ames_test  <- Ames[-index, ]
 
 
 
+# Manipulating response variable
+# Sale price is skewed right (mean > median):
+ames_train %>% 
+  ggplot()+
+  geom_histogram(aes(x=Sale_Price), color='red', fill='navy')+
+  theme_bw()
+
+
+# Although not required, Linear regression is improved when the response variables are symmetrically distributed
+# the log() function transforms skewed data to look more symmetric:
+
+ames_train %>% 
+  ggplot()+
+  geom_histogram(aes(x=log(Sale_Price)), color='red', fill='navy')+
+  theme_bw()
+
+
 # Create training and testing feature model matrices and response vectors.
 # we use model.matrix(...)[, -1] to discard the intercept
 ames_train_x <- model.matrix(Sale_Price ~ ., ames_train)[, -1]
@@ -23,7 +40,7 @@ ames_test_y <- log(ames_test$Sale_Price)
 
 # What is the dimension of of your feature matrix?
 dim(ames_train_x)
-## [1] 2054  307
+## [1] 2051  307
 
 # Apply Ridge regression to ames data
 ames_ridge <- glmnet(
