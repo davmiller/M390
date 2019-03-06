@@ -1,7 +1,7 @@
 # Function
 coord_desc <- function(X,Y, epsilon, drop_int=FALSE){
   m <- ncol(X)
-  
+  n <- nrow(X)
   if (drop_int==FALSE){
     # Add column of 1's for 
     X <- matrix(data=c(matrix(1,n),X),ncol=(m+1))  
