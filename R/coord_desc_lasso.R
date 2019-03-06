@@ -27,8 +27,8 @@ coord_desc_lasso <- function(X,Y, epsilon, lambda, drop_int=FALSE){
     
     # Update b using soft-thresholding
     b[j,1] <- case_when(
-      pj < -lambda/2 ~ (pj+lambda/2)/zj,
-      pj > lambda/2 ~ (pj-lambda/2)/zj,
+      pj < -n*lambda/2 ~ (pj+n*lambda/2)/zj,
+      pj > n*lambda/2 ~ (pj-n*lambda/2)/zj,
       TRUE ~ 0
     )
   }
