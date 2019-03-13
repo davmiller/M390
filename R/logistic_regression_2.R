@@ -12,8 +12,9 @@ library(Metrics)
 # Example 1 data from class 1
 ex_1 <- read.csv('https://raw.githubusercontent.com/davmiller/M390/master/data/example_data_1.csv')
 
+
 # Plot the data and linear model
-model1 %>% 
+ex_1 %>% 
   ggplot(aes(x=x,y=y))+
   geom_point(color='navy')+
   geom_smooth(method='lm',se=FALSE, color='red')+
@@ -21,8 +22,11 @@ model1 %>%
 
 # Build linear model
 model1 <- lm(y~x, data=ex_1)
+
 # Look at summary
-summary(model1)
+summary(model1) # Coeffs are significant (Pr(>|t|) small), p-value small, adjusted R-squared ok
+
+
 # Look at residual plot
 plot(model1, which=1) # Residuals are not evenly "scattered" with mean 0, they have a clear pattern.  Thus linear model is not appropriate.
 
