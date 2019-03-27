@@ -96,7 +96,7 @@ pw_lin.predict <- function(model,newdata){
   k <- length(coef(model$model)) # Number of knots is same as number of coefficients in model
   xj <- model$xj
   Xp <- tent.X(newdata,xj)
-  return(Xp %*% coef(model$model))
+  return(c(Xp %*% coef(model$model)))
 }
 
 
@@ -138,3 +138,41 @@ mse(mcycle$accel,mcycle$pred)
 
 
 # Build more models with different k values, which is best?
+
+#--------------------------------------------------------------------------------
+
+# Pennalizing wiggliness
+
+pen_pw_lin_model <- function(Y,X,k,lambda){
+  xj <- seq(min(X), max(X), length=k) # Location of k knots
+  Xp = tent.X(X,xj) # Build tent Matrix Xp
+  
+  D <- diff(diag(length(xj)), differences = 2) ##sqrt penalty
+  X <- rbind(Xp,sqrt(lambda)*D)
+  y <- c(Y,rep(0,nrow(D)))
+  model <- lm(y~X-1) # Linear model Y ~ Xp*b
+  return(list(model=model, xj=xj))
+}
+
+
+model2 <- pen_pw_lin_model(Y=mcycle$accel, X=mcycle$times, k=10, lambda=1.5)
+
+
+# Plot lines on over the whole interval:
+s <- s %>% 
+  mutate(pred2 = pw_lin.predict(model2,times)) # Add predictions
+
+
+# Plot data
+s %>% 
+  ggplot()+
+  geom_point(data=mcycle,aes(x=times,y=accel), color='navy', alpha=.5)+
+  geom_line(aes(x=times, y=pred2), color='limegreen', size=1)+ # New, penalized model
+  geom_line(aes(x=times, y=pred), color='red',linetype=2, size=1)+ # Original model
+  theme_bw()
+
+
+# Try with different lambda values, plot and see what happens.
+
+
+
