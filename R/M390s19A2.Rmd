@@ -1,0 +1,182 @@
+---
+title: "M390 Assignment 2"
+author: "Dave Miller"
+date: "3/20/2019"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(Metrics)
+library(broom)
+
+# In this assignment, we are working with results from Men's College Basketball games from 2016-2018.
+# Bring in dataset from Github
+NCAA <- read_csv('https://raw.githubusercontent.com/davmiller/M390/master/data/NCAA_MBB_16_18.csv')
+```
+
+## Assignment 2: Comparing linear and logistic regression
+
+In this assignment, you will continue the in-class work where you built two models on the NCAA basketball dataset:
+
+- Predicted the score difference given the FG% difference using **linear regression**.
+- Predicted the probability the home team wins the game given the FG% difference using **logistic regression**.
+
+In this assignment, you will build two **multivariate models**, predicting the same two responses from the in-class assignment, using 
+
+- FG% diff
+- FT% diff
+- FG3% diff
+- REBs diff
+- TO diff
+
+as predictors.  The goal is to compare your predictive accuracy of the mutlivariate model to that of the univariate model built in class.  Ultimately, you will choose the model that balances predictive accuracy with the fewest predictors.
+
+# Section 1: Data manipulation and exploration.
+
+1.  Plot a bar graph of the score_diff distribution using geom_bar(aes(x=score_diff)).
+
+```{r echo=TRUE}
+
+```
+
+QUESTION: Does the distribution of the score_diff require transformation? Why or why not?
+
+
+
+
+2. Plot 5 separate dot plots of score_diff vs. fg_pct_diff, fg3_pct_diff, ft_pct_diff, rebs_diff, TO_diff.  Include a title, colored points and a theme.
+
+
+```{r echo=TRUE}
+
+```
+
+
+3. Add a new column called home_win to the dataframes that indicates if the home team won the game using ifelse().  
+
+
+```{r echo=TRUE}
+
+```
+
+
+4. Split into training and testing sets using 2016 and 2017 as training sets, and 2018 as the test set.
+
+
+```{r echo=TRUE}
+
+```
+
+
+# Section 2: Linear regression
+
+1. Build a multivariate linear model that predicts score difference given several predictors on the training set.
+
+
+```{r echo=TRUE}
+
+```
+
+
+2. Analyze the model using summary(), coef() and/or tidy().  Also, plot the residuals of the model.
+ 
+```{r echo=TRUE}
+
+```
+
+
+
+3. Find the MSE of the model on both the training and testing sets.
+
+
+```{r echo=TRUE}
+
+```
+
+QUESTION: Compare the MSE of the test set to the one found in the single variable case from the in-class assignment.  Is it better, worse, or no difference?  Given your results, should we include all of the indicator variables used in your multivariate model?  Why or why not?
+
+
+7.  Repeat steps 1-3 with various predictors selcted.  
+
+
+```{r echo=TRUE}
+
+```
+
+QUESTION: The goal of this project is to choose the model that balances predictive accuracy and fewest number of predictors.  Which model will you choose, and why?
+
+
+# Section 3: Logistic regression
+
+1. Plot 5 separate dot plots of home_win vs. fg_pct_diff, fg3_pct_diff, ft_pct_diff, rebs_diff, TO_diff.  Include a title, colored points and a theme.
+
+
+```{r echo=TRUE}
+
+```
+
+
+2. Build a multivariate logistic regression model that will predict the probability that the home team will win given several predictors.
+
+
+```{r echo=TRUE}
+
+```
+
+
+3. Analyze the model using summary(), coef() and/or tidy().
+
+
+```{r echo=TRUE}
+
+```
+
+
+QUESTION: Which predictors increase the probability that the home team will win as they increase?  Which decrease? Explain your reasoning while referencing your model.
+
+
+4. Find the accuracy of the model by creating a confusion matrix on the training set and test set.
+
+
+```{r echo=TRUE}
+
+```
+
+
+QUESTION: How many false postives does your model produce on the test set?  False Negatives?
+
+
+5. Calculate the misclassification rate on the training set and test set.
+
+```{r echo=TRUE}
+
+```
+
+
+6. Calculate the logloss on both sets.
+
+
+```{r echo=TRUE}
+
+```
+
+
+QUESTION: Compare the misclassification rate and the logloss of the test set to the one found in the single variable case from the in-class assignment.  Is it better, worse, or no difference?  Given your results, should we include all of the indicator variables used in your multivariate model?  Why or why not?
+
+7.  Repeat steps 1-6 with various predictors selcted.  
+
+
+```{r echo=TRUE}
+
+```
+
+QUESTION: The goal of this project is to choose the model that balances predictive accuracy and fewest number of predictors.  Which model will you choose, and why?
+
+
+
+
