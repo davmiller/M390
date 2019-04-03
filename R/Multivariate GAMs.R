@@ -162,7 +162,18 @@ data.frame(pitch_x = c(outer(xx, zz * 0 + 1)),
   #scale_fill_gradient2(low = "dodgerblue3", high = "red2")+ # Change colors
   theme_minimal()
 
+# data frame for strike zone
+strike_zone = data.frame(x=c(-60,-60,60,60,-60), y=c(-80,80,80,-80,-80))
 
+# Plot with strike zone on top
+data.frame(pitch_x = c(outer(xx, zz * 0 + 1)),
+           pitch_y = c(outer(xx * 0 + 1, zz))) %>% 
+  mutate(p_strike=round(predict(sz_mod, newdata=., type='response'),2))%>% 
+  ggplot()+
+  geom_tile(aes(x=pitch_x,y=pitch_y, fill=p_strike))+
+  geom_path(data=strike_zone, aes(x=x,y=y), color='white')+
+  #scale_fill_gradient2(low = "dodgerblue3", high = "red2")+ # Change colors
+  theme_minimal()
 
 
 #--------------------------------------------------------------------------------------------------------------
@@ -172,5 +183,8 @@ base_player <- read_csv('https://raw.githubusercontent.com/davmiller/M390/master
 
 # Plot data and build model to predict if player A will swing at the pitch given its location.
 # Repeat for player B 
+
+
+
 
 
