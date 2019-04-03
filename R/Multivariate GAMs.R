@@ -133,7 +133,7 @@ base_data %>%
 
 # Model building
 # Predict if the pitch is called a strike given its location
-sz_mod = gam(strike ~ s(pitch_x,pitch_y), family='binomial', data=filter(base_data), method='REML')
+sz_mod = gam(strike ~ s(pitch_x,pitch_y), family='binomial', data=base_data, method='REML')
 
 # Plot model
 plot(sz_mod)  
@@ -159,7 +159,7 @@ data.frame(pitch_x = c(outer(xx, zz * 0 + 1)),
   mutate(p_strike=round(predict(sz_mod, newdata=., type='response'),2))%>% 
   ggplot()+
   geom_tile(aes(x=pitch_x,y=pitch_y, fill=p_strike))+
-  scale_fill_gradient2(low = "dodgerblue3", high = "red2")+
+  #scale_fill_gradient2(low = "dodgerblue3", high = "red2")+ # Change colors
   theme_minimal()
 
 
@@ -172,3 +172,5 @@ base_player <- read_csv('https://raw.githubusercontent.com/davmiller/M390/master
 
 # Plot data and build model to predict if player A will swing at the pitch given its location.
 # Repeat for player B 
+
+
